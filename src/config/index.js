@@ -4,8 +4,8 @@ import 'firebase/storage'
 import 'firebase/auth'
 
 const config = {
-    apiKey: "yourApiKey",
-    authDomain: "yourProject.firebaseapp.com",
+    apiKey: "yourApiKey1",
+    authDomain: "yourProject2.firebaseapp.com",
     databaseURL: "https://yourproject.firebaseio.com",
     projectId: "yourProject",
     storageBucket: "yourProject.appspot.com",
