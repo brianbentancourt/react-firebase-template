@@ -9,8 +9,8 @@ const config = {
     databaseURL: "https://yourproject.firebaseio.com",
     projectId: "yourProject",
     storageBucket: "yourProject.appspot.com",
-    messagingSenderId: "yourId",
-    appId: "yourId"
+    messagingSenderId: "yourID",
+    appId: "yourID"
 }
 
 firebase.initializeApp(config)
