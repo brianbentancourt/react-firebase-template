@@ -49,6 +49,9 @@ export default class NavBar extends Component {
                         <NavItem>
                             <Link onClick={this.LinkClick} className="nav-link navlink" to="/">Inicio</Link>
                         </NavItem>
+                        <NavItem>
+                            <Link onClick={this.LinkClick} className="nav-link navlink" to="/chat/">Chat</Link>
+                        </NavItem>
                     </Nav>
                 </Collapse>
             </Navbar>
