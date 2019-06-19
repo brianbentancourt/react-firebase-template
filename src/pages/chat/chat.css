@@ -1,0 +1,11 @@
+.messageList{
+    padding-top: 15px;
+    height: 80vh !important;
+    overflow-x: auto;
+}
+
+.formChat{
+    position: fixed !important;
+    bottom: 0px;
+    width: 80%;
+}

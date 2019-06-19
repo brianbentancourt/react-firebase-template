@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    Nav,
-    NavItem,
-    NavLink,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    UncontrolledDropdown
+    Container, Row, Col
 } from 'reactstrap'
-import MessageItem from '../../components/messageItem';
-
+import MessageItem from '../../components/messageItem'
+import FormMessage from './formMessage'
+import MessageObj from '../../utilities/message'
+import './chat.css'
+const Msg = new MessageObj()
 
 export default class NavBar extends Component {
     constructor(props) {
@@ -21,19 +14,72 @@ export default class NavBar extends Component {
 
         this.state = {
             user: null,
-            messages:[]
+            message: Msg,
+            messages: []
         }
+        this.sendMessage = this.sendMessage.bind(this)
+        this.updateMessages = this.updateMessages.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
 
+    onChange(e) {
+        this.setState({
+            message: {
+                ...this.state.message,
+                [e.target.id]: e.target.value
+            }
+        })
+    }
+
+    sendMessage(e) {
+        e.preventDefault()
+        const _this = this
+        let { message } = this.state
+        Msg.saveMessage(message).then(()=>{
+            _this.setState({
+                message: new MessageObj()
+            })
+            //_this.loadMessages()
+        })
+    }
+
+    loadMessages(){
+        const _this = this
+        Msg.getMessages().then(messages => {
+            _this.setState({ messages })
+        })
+    }
+
+    updateMessages(messages){
+        this.setState({ messages })
+    }
+
+    componentWillMount() {
+        //this.loadMessages()
+        const _this = this
+        Msg.getMessagesRealtime(_this.updateMessages)
+    }
 
     render() {
         return (
-            <React.Fragment>
-                <h1>Chat</h1>
+            <Container>
+                <div className="messageList">
                 {
-                    this.state.messages.map(msg => <MessageItem message={msg} />)
+                    this.state.messages.map(msg => <MessageItem key={msg.id} message={msg} />)
                 }
-            </React.Fragment>
+                </div>
+                <Row>
+                    <Col>
+                        <FormMessage
+                            className='formChat'
+                            onChange={this.onChange}
+                            message={this.state.message}
+                            sendMessage={this.sendMessage}
+                        />
+                    </Col>
+                </Row>
+
+            </Container>
         )
     }
 }
