@@ -97,7 +97,11 @@ export default class LoginUsers extends Component {
     render() {
         return (
             <LoginContainer
+                loginWithEmail={this.state.loginWithEmail}
+                onLoginFacebook={this.onLoginFacebook}
+                onLoginGoogle={this.onLoginGoogle}
                 onLogin={this.onLogin}
+                onLoginEmail={this.onLoginEmail}
                 toggleShowPass={this.toggleShowPass}
                 modalLogin={this.props.modalLogin}
                 toggleModalLogin={this.props.toggleModalLogin}

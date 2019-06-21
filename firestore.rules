@@ -9,6 +9,10 @@ service cloud.firestore {
       allow read: if request.auth.uid == resource.data.uid || isAdmin();
       allow create, update, delete: if request.auth.uid != null && isAdmin()
    	}
+    match /errores/{error} {
+      allow create;
+      allow read, update, delete: if isAdmin()
+   	}
     function isAdmin() {
     return get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).IsAdmin ||
     	get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.IsAdmin;

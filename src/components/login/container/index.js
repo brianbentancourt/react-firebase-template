@@ -11,13 +11,15 @@ import { eye } from 'react-icons-kit/fa/eye'
 import { eyeSlash } from 'react-icons-kit/fa/eyeSlash'
 import '../login.css'
 
-export default function loginContainer(props){
+export default function loginContainer(props) {
 
-    return(
+    return (
         <React.Fragment>
-                <Modal isOpen={props.modalLogin} toggle={props.toggleModalLogin} className={props.className}>
-                    <ModalHeader toggle={props.toggleModalLogin}>Ingresar al sistema</ModalHeader>
-                    <ModalBody>
+            <Modal isOpen={props.modalLogin} toggle={props.toggleModalLogin} className={props.className}>
+                <ModalHeader toggle={props.toggleModalLogin}>Ingresar al sistema</ModalHeader>
+                <ModalBody>
+                    {
+                        props.loginWithEmail &&
                         <Form onSubmit={props.onLogin}>
                             <FormGroup>
                                 <InputGroup>
@@ -50,17 +52,9 @@ export default function loginContainer(props){
                                     </InputGroupAddon>
                                 </InputGroup>
                             </FormGroup>
-                            {
-                                props.messageLoginError && <Alert color="danger">
-                                    {props.messageLoginError}
-                                    <a href="#" onClick={props.ontoggleErrorDetalle} className="verMasError float-right">{props.toggleErrorDetalle ? "Ocultar" : "Ver más"}</a>
-                                    {props.toggleErrorDetalle && props.messageLoginErrorDetails}
-                                </Alert>
-                            }
-                            {' '}
                             <FormGroup>
                                 <InputGroup>
-                                    <Button className='btn-rojo' block disabled={props.loading} >
+                                    <Button color="success" block disabled={props.loading} >
                                         {
                                             !props.loading ? "Ingresar" : "Iniciando sesión..."
                                         }
@@ -68,8 +62,34 @@ export default function loginContainer(props){
                                 </InputGroup>
                             </FormGroup>
                         </Form>
-                    </ModalBody>
-                </Modal>
-            </React.Fragment>
+                    }
+                    {
+                        props.messageLoginError && <Alert color="danger">
+                            {props.messageLoginError}
+                            <a href="#" onClick={props.ontoggleErrorDetalle} className="verMasError float-right">{props.toggleErrorDetalle ? "Ocultar" : "Ver más"}</a>
+                            {props.toggleErrorDetalle && props.messageLoginErrorDetails}
+                        </Alert>
+                    }
+                    <FormGroup>
+                        <InputGroup>
+                            <Button onClick={props.onLoginFacebook} className="btn-Facebook" block> Iniciar con Facebook</Button>
+                        </InputGroup>
+                    </FormGroup>
+                    <FormGroup>
+                        <InputGroup>
+                            <Button onClick={props.onLoginGoogle} className="btn-Google" block> Iniciar con Google</Button>
+                        </InputGroup>
+                    </FormGroup>
+                    {
+                        !props.loginWithEmail &&
+                        <FormGroup>
+                            <InputGroup>
+                                <Button onClick={props.onLoginEmail} color='success' block>Usuario y contraseña</Button>
+                            </InputGroup>
+                        </FormGroup>
+                    }
+                </ModalBody>
+            </Modal>
+        </React.Fragment>
     )
 }
