@@ -1,0 +1,29 @@
+.btn-Facebook{
+    background-color: #3b5998 !important;
+}
+
+.btn-Facebook:hover{
+    background-color: #213768 !important;
+}
+
+.btn-Google{
+    background-color: #dd4b39 !important;
+}
+
+.btn-Google:hover{
+    background-color: #882d21 !important;
+}
+
+.verMasError{
+    color: #47160f;
+    font-size: 12px;
+}
+
+.verMasError:hover{
+    color: #000000;
+}
+
+.messageLoginErrorDetails{
+    font-size: 13px;
+    padding-top: 5px;
+}

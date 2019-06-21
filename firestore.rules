@@ -1,0 +1,17 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /messages/{msg}{
+    	allow read;
+      allow write: if request.auth.uid != null;
+    }
+    match /users/{user} {
+    // validar que sea el mismo usuario el propietario que quiera modificar o eliminar sus datos
+      allow read: if request.auth.uid == resource.data.uid || isAdmin();
+      allow create, update, delete: if request.auth.uid != null && isAdmin()
+   	}
+    function isAdmin() {
+    return get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).IsAdmin ||
+    	get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.IsAdmin;
+		}
+  }
+}

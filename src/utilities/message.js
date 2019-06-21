@@ -36,6 +36,7 @@ export default class Message {
     }
 
     saveMessage(message) {
+        message.Date = new Date()
         return new Promise((resolve, reject) => {
             database.collection("messages")
                 .doc()
