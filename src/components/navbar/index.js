@@ -30,10 +30,14 @@ export default class NavBar extends Component {
         this.state = {
             isOpen: false,
             modalLogin: false,
+            user: null
         }
         this.toggle = this.toggle.bind(this)
         this.LinkClick = this.LinkClick.bind(this)
-        this.Login = this.Login.bind(this)
+        this.LogIn = this.LogIn.bind(this)
+        this.LogOut = this.LogOut.bind(this)
+        this.loginSuccess = this.loginSuccess.bind(this)
+        this.toggleModalLogin = this.toggleModalLogin.bind(this)
     }
 
     toggle() {
@@ -42,17 +46,30 @@ export default class NavBar extends Component {
         })
     }
 
-    Login() {
+    toggleModalLogin() {
+        this.setState({
+          modalLogin: !this.state.modalLogin
+        })
+      }
+
+    LogIn() {
         this.LinkClick()
         this.setState({
             modalLogin: true
         })
     }
 
+    loginSuccess(user) {
+        this.setState({
+          user,
+          modalLogin: false
+        })
+      }
+
     LogOut(e) {
         const _this = this
         _this.LinkClick()
-        Login.logOut().then(result => {
+        Login.logOut().then(() => {
             _this.setState({
                 user: null
             })
@@ -72,23 +89,10 @@ export default class NavBar extends Component {
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-principal" right>
                         <DropdownItem className="dropdown-item-principal">
-                            <Link className="nav-link DropdownItem-link" to={`/usuario/${this.state.user && this.state.user.uid}`}>{this.state.user.email}</Link>
+                            <Link className="nav-link DropdownItem-link" to={`/user/${this.state.user && this.state.user.uid}`}>{this.state.user.email}</Link>
                         </DropdownItem>
                         <DropdownItem className="dropdown-divider-principal" divider />
-                        <DropdownItem className="dropdown-item-principal">
-                            <Link className="nav-link DropdownItem-link" to={`/admin/empresa/`}>Administrar empresa</Link>
-                        </DropdownItem>
-                        <DropdownItem className="dropdown-item-principal">
-                            <Link onClick={this.LinkClick} className="nav-link DropdownItem-link" to={`/admin/productos/`}>Administrar productos</Link>
-                        </DropdownItem>
-                        <DropdownItem className="dropdown-item-principal">
-                            <Link onClick={this.LinkClick} className="nav-link DropdownItem-link" to={`/admin/categorias/`}>Administrar categorías</Link>
-                        </DropdownItem>
-                        <DropdownItem>
-                            <Link onClick={this.LinkClick} className="nav-link DropdownItem-link" to="/admin/analytics">Analytics</Link>
-                        </DropdownItem>
-                        <DropdownItem className="dropdown-divider-principal" divider />
-                        <DropdownItem onClick={this.logOut} className="dropdown-item-principal">
+                        <DropdownItem onClick={this.LogOut} className="dropdown-item-principal">
                             <Link onClick={this.LinkClick} className="nav-link DropdownItem-link" to="/">Salir</Link>
                         </DropdownItem>
                     </DropdownMenu>
@@ -136,7 +140,7 @@ export default class NavBar extends Component {
                                     this.onUserLogged()
                                     :
                                     <NavItem>
-                                        <NavLink onClick={this.Login} className="navlink" href="#">
+                                        <NavLink onClick={this.LogIn} className="navlink" href="#">
                                             Ingresar
                                     </NavLink>
                                     </NavItem>

@@ -66,6 +66,7 @@ export default function loginContainer(props) {
                     {
                         props.messageLoginError && <Alert color="danger">
                             {props.messageLoginError}
+                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <a href="#" onClick={props.ontoggleErrorDetalle} className="verMasError float-right">{props.toggleErrorDetalle ? "Ocultar" : "Ver más"}</a>
                             {props.toggleErrorDetalle && props.messageLoginErrorDetails}
                         </Alert>

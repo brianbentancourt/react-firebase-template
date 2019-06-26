@@ -4,8 +4,6 @@ import {
     InputGroup, InputGroupAddon,
 } from 'reactstrap'
 import LoginModal from '../../../components/login'
-import UserObj from '../../../utilities/user'
-const User = new UserObj()
 
 export default class formMessage extends Component {
     constructor(props) {
@@ -24,7 +22,7 @@ export default class formMessage extends Component {
     }
 
     render() {
-        if (User.userLogged)
+        if (this.props.user)
             return (
                 <React.Fragment>
                     <Form onSubmit={this.props.sendMessage} className="formChat">
@@ -45,7 +43,8 @@ export default class formMessage extends Component {
                 <React.Fragment>
                     <div>
                         Debes
-                        <a href="#" onClick={this.toggleLogin}>Iniciar sesión</a>
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                        <a href="#" onClick={this.toggleLogin}>{` Iniciar sesión `}</a>
                         para poder escribir
                     </div>
                     <LoginModal modalLogin={this.state.modalLogin} toggleModalLogin={this.toggleModalLogin} loginSuccess={this.loginSuccess} />

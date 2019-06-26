@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../../logo.svg'
 import './home.css'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
   return (
@@ -8,16 +9,15 @@ export default function Home() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Show the <code>code</code> in <a href="https://github.com/brianbentancourt/react-firebase-template" target="_blank" rel="noopener noreferrer">GitHub</a>.
         </p>
-        <a
+        <Link
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
+          to="/chat"
           rel="noopener noreferrer"
         >
-          Learn React
-        </a>
+          Go to the chat example
+        </Link>
       </header>
     </div>
   )

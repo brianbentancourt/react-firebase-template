@@ -34,6 +34,7 @@ export default class LoginUsers extends Component {
         this.setState({
             toggleErrorDetalle: !this.state.toggleErrorDetalle
         })
+        console.log(!this.state.toggleErrorDetalle)
     }
 
     onInputChange(el) {
